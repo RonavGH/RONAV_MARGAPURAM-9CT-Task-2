@@ -4,10 +4,35 @@
 
 # Functional Requirements:
  
-* Have the ability to detect the presence of smoke and heat in the vicinity, helping spot smoldering and flaming fires early before they cause a fire.
-
-* Produce an audible output of at least 85 DB, to alert people in the vicinity of 3 meters that smoke and heat in the area make triggered the smoke detector.
-
-* Be abled to use optical photoelectric technology to reduce false triggers from steam or cooking
+* **Power Detection & Alerts**: If the machine is turned on, the Blue LED also stays on (so that users are aware the alarm is powered).
+* **Fire Detection & Alerts**: If the sensor values are above boundary (have yet to determine), Red LED turns on and buzzer continously buzz.
+* **Neutral and Warning Alerts**: If the sensor values are within the boundary, Green LED is activated and remains on. If the sensor values are within but less than 2 degrees/values off the boundary, a Yellow LED turns on and the buzzer starts buzzing off and on repeatedly.
 
 # Unfunctional Requirements:
+
+# PSEUDOCODE FOR ALGORITHM
+
+START
+
+Initialise smoke sensor
+Initialise green LED
+Initialise red LED
+Initialise buzzer
+
+LOOP forever
+
+    Read smoke level
+
+    IF smoke level > threshold THEN
+        Turn green LED OFF
+        Turn red LED ON
+        Turn buzzer ON
+    ELSE
+        Turn green LED ON
+        Turn red LED OFF
+        Turn buzzer OFF
+    ENDIF
+
+    Wait 0.1 seconds
+
+END LOOP

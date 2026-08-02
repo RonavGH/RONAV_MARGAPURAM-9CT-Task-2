@@ -4,20 +4,27 @@
 
 # Functional Requirements:
  
-* **Power Detection & Alerts**: If the machine is turned on, the Blue LED also stays on (so that users are aware the alarm is powered).
-* **Fire Detection & Alerts**: If the sensor values are above boundary (have yet to determine), Red LED turns on and buzzer continously buzz.
-* **Neutral and Warning Alerts**: If the sensor values are within the boundary, Green LED is activated and remains on. If the sensor values are within but less than 2 degrees/values off the boundary, a Yellow LED turns on and the buzzer starts buzzing off and on repeatedly.
+* **Power Indicator**: When the smoke detector is switched on, the blue LED remains on to indicate the system has power.
+Safe Condition: When the smoke sensor reading is below the warning threshold, the green LED remains on and the buzzer is off.
+* **Warning Condition**: When the smoke sensor reading is within 2 units below the danger threshold, the yellow LED flashes and the buzzer sounds intermittently (0.5 seconds on, 0.5 seconds off).
+* **Danger Condition**: When the smoke sensor reading is equal to or above the danger threshold, the red LED flashes continuously and the buzzer sounds continuously.
+* **False Alarm Button**: When the mute button is pressed during a danger condition, the buzzer is muted for 20 seconds while the red LED continues flashing. After 20 seconds, if smoke is still detected, the buzzer resumes.
+Button Cooldown: After the mute button has been used, it cannot be used again for 60 seconds.
 
 # Unfunctional Requirements:
+
+* **Response Time**: The machine should respond as quick as possible without compromising the functionality of the code. Every 100-400 milliseconds is the approximate reaction of the smoke detector, when it detects certain amounts of smoke or heat in the vicinity.
+* **False Alarm Button**: In case of a false alarm, a button can be pressed that will mute the machine for 20 seconds. If it still keeps detecting flames, it will continue buzzing after the 20 seconds. There would be a one minute cooldown between button presses (meaning 40 seconds of true fire alerts with buzzing between them), and the Red LED will still continue flashing throughout the false alarm.
+
 
 # PSEUDOCODE FOR ALGORITHM
 
 START
 
-Initialise smoke sensor
-Initialise green LED
-Initialise red LED
-Initialise buzzer
+INITIALISE smoke sensor
+INITIALISE green LED
+INITIALISE red LED
+INITIALISE buzzer
 
 LOOP forever
 
@@ -33,6 +40,6 @@ LOOP forever
         Turn buzzer OFF
     ENDIF
 
-    Wait 0.1 seconds
+    Wait 0.2 seconds
 
 END LOOP

@@ -21,25 +21,67 @@ Button Cooldown: After the mute button has been used, it cannot be used again fo
 
 START
 
-INITIALISE smoke sensor
-INITIALISE green LED
-INITIALISE red LED
-INITIALISE buzzer
+INITIALISE ON Blue LED
 
-LOOP forever
+SET warning threshold
+SET danger threshold
+SET mute timer to 0
+SET cooldown timer to 0
 
-    Read smoke level
+WHILE smoke detector is ON
 
-    IF smoke level > threshold THEN
-        Turn green LED OFF
-        Turn red LED ON
-        Turn buzzer ON
+    READ smoke sensor value
+
+    IF smoke sensor value >= danger threshold THEN
+
+        Turn OFF Green LED
+        Turn OFF Yellow LED
+
+        IF mute timer = 0 THEN
+            Turn ON Red LED
+            Turn ON buzzer
+        ELSE
+            Turn ON Red LED
+            Turn OFF buzzer
+        END IF
+
+        IF mute button is pressed AND cooldown timer = 0 THEN
+            SET mute timer to 20 seconds
+            SET cooldown timer to 60 seconds
+        END IF
+
+    ELSE IF smoke sensor value >= (danger threshold - 2) THEN
+
+        Turn OFF Green LED
+        Turn OFF Red LED
+
+        Flash Yellow LED
+        Buzz intermittently
+        Wait 0.5 seconds
+
+        Turn OFF Yellow LED
+        Turn OFF buzzer
+        Wait 0.5 seconds
+
     ELSE
-        Turn green LED ON
-        Turn red LED OFF
-        Turn buzzer OFF
-    ENDIF
 
-    Wait 0.2 seconds
+        Turn ON Green LED
+        Turn OFF Yellow LED
+        Turn OFF Red LED
+        Turn OFF buzzer
 
-END LOOP
+    END IF
+
+    IF mute timer > 0 THEN
+        Decrease mute timer
+    END IF
+
+    IF cooldown timer > 0 THEN
+        Decrease cooldown timer
+    END IF
+
+    WAIT 100–400 milliseconds
+
+END WHILE
+
+END

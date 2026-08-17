@@ -2,6 +2,8 @@
 
 # Requirements Definition: 
 
+ ** Include the flowchart of my smoke detector **
+
 # Functional Requirements:
  
 * **Power Indicator**: When the smoke detector is switched on, the blue LED remains on to indicate the system has power.
@@ -53,7 +55,7 @@ WHILE smoke detector is ON
     ELSE IF smoke sensor value >= (danger threshold - 2) THEN
 
         Turn OFF Green LED
-        Turn OFF Red LED
+        Turn OFF Red LED 
 
         Flash Yellow LED
         Buzz intermittently
@@ -80,7 +82,7 @@ WHILE smoke detector is ON
         Decrease cooldown timer
     END IF
 
-    WAIT 100–400 milliseconds
+    WAIT 100–400 milliseconds (ms)
 
 END WHILE
 

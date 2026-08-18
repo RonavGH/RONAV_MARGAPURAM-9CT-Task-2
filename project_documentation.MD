@@ -15,13 +15,14 @@
 * **Send data to the Pico**: The flame sensor must send its readings to the Raspberry Pi Pico for processing.
 
 * **Safe Level**: When no presence of flame is detected, the system doesnt produce a flickering yellow light, displaying that the status is safe.
+
 # Unfunctional Requirements:
 
 * **Response Time**: The machine should respond as quick as possible without compromising the functionality of the code. Every 100-400 milliseconds is the approximate reaction of the flame sensor system, when it detects the presence of flames in the vicinity.
 
 * **False Alarm Reduction**: The system should minimise false alarms caused by small changes in sensor readings or in normal environmental light.
 
-* **Ease of system use**: The LED and buzzer alerts should be clear enough that a user can immediately understand the system's current status.
+* **Ease of system use**: The LED alerts should be clear enough that a user can immediately understand the system's current status.
 
 * **Safety warnings**: The system should provide an immediate warning to the user when the presence of flame is detected and should not rely on the user to monitor the sensor reading.
 
@@ -33,14 +34,14 @@ Initialise flame sensor as INPUT
 Initialise Raspberry Pi Pico onboard LED as OUTPUT
 
 WHILE system is running
-   CALL CheckFlame
+   CALL Check_flame
     WAIT 0.5 seconds
 END WHILE
 
 END
 
 
-SUBROUTINE CheckFlame
+SUBROUTINE Check_flame
 
     Read flame sensor
 
@@ -66,3 +67,43 @@ SUBROUTINE Display_Status(flame_detected)
     END IF
 
 END SUBROUTINE
+
+Code for the flame sensor project:
+
+import machine
+import time
+
+# Configure the digital flame sensor
+# D0 of the flame sensor is connected to GP16
+Flame_Digital = machine.Pin(16, machine.Pin.IN)
+
+# Configure the Raspberry Pi Pico's onboard LED as an output
+# The LED will turn on when a flame is detected
+Onboard_Led = machine.Pin("LED", machine.Pin.OUT)
+
+print("--- Flame Sensor Active ---")
+
+while True:
+    # Check the digital output of the flame sensor
+    # The sensor outputs 1 (HIGH) when a flame is detected
+    if Flame_Digital.value() == 1:
+        # Display a warning message in the Shell
+        print("WARNING: Flame Detected!")
+
+        # Turn the onboard LED ON
+        Onboard_Led.value(1)
+
+    else:
+        # Display a safe status message in the Shell
+        print("Status: Safe")
+
+        # Turn the onboard LED OFF
+        Onboard_Led.value(0)
+
+    # Wait for 0.5 seconds before checking the sensor again
+    # This controls how frequently the sensor is checked
+    time.sleep(0.5)
+
+
+
+

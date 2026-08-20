@@ -69,6 +69,14 @@ End Loop
 
 *Implication* - The system allows the user to detect whether there is a flame within the vicinity. I would suggest adding a buzzer to improve on.
 
+**Evaluator 3: Max E**:
+
+Plus - Meets functional requirements quite well. The code is short and well-written to ensure maximum efficiency. Module works well and system runs accordingly with no fault.
+
+Minus - There could be more done with this mode instead of just a few LEDs and flame sensor. There could be more test cases to work with.
+
+Implication - Maybe include something with another sensor, such as a buzzer in case the flame stays for too long or a button to revert the system back in case of failure. Something else to enhance this working module and linking to a more real-world issue. Aside from that, the code is excellent and the module works well with its requirements.
+
 ### Project Evaluation
 
 ### Functional success criteria

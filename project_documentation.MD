@@ -2,7 +2,7 @@
 
 # Requirements Definition: 
 
- ** Include the flowchart of how my flame sensor works **
+ ** 
 
 # Functional Requirements:
  
@@ -28,45 +28,27 @@
 
 # PSEUDOCODE FOR ALGORITHM
 
-BEGIN
+Start
 
-Initialise flame sensor as INPUT
-Initialise Raspberry Pi Pico onboard LED as OUTPUT
+Set flame sensor (GP16) as input
+Set onboard LED as output
+Print "Flame Sensor Active"
 
-WHILE system is running
-   CALL Check_flame
-    WAIT 0.5 seconds
-END WHILE
+loop forever
 
-END
+    Read the flame sensor
 
+    If flame is detected then
+        Print "WARNING: Flame Detected!"
+        Turn the onboard LED on
+    Else
+        Print "Status: Safe"
+        Turn the onboard LED off
+    End If
 
-SUBROUTINE Check_flame
+    Wait 0.5 seconds
 
-    Read flame sensor
-
-    IF sensor detects a flame THEN
-        Set flame_detected = TRUE
-    ELSE
-        Set flame_detected = FALSE
-    END IF
-
-    CALL Display_Status(flame_detected)
-
-END SUBROUTINE
-
-
-SUBROUTINE Display_Status(flame_detected)
-
-    IF flame_detected = TRUE THEN
-        Display "WARNING: Flame Detected!"
-        Turn Raspberry Pi Pico onboard LED ON
-    ELSE
-        Display "Status: Safe"
-        Turn Raspberry Pi Pico onboard LED OFF
-    END IF
-
-END SUBROUTINE
+End loop
 
 Code for the flame sensor project:
 
@@ -104,6 +86,26 @@ while True:
     # This controls how frequently the sensor is checked
     time.sleep(0.5)
 
+PEER EVALUATION
+Evaluator 1: Fayaaz:
+
+Plus - Achieves it's desired function, wiring doesn't seem very cluttered or messy. The LED system allows users to understand how the machine works very well.
+
+Minus - Some issues with wiring and the functional requirements are slightly different to the new design.
+
+Implication - The creator has added a lot of new additions to the initial machine. These additions do improve the acessibility of the machine, but also make it so that it doesn't follow the functional requirements completely and it has made wiring harder for the creator.
+
+ALSO RONAV U NEED TO INCLUDE FLOWCHART FOR THE ALGORITHMS OTHERWISE YOU WILL LOSE MARKS!!!
+
+Evaluator 2: Michael K:
+
+Plus - The flame detection system works with clean code, very optimised and simple to follow. - The flame detection system outputs on multiple LEDs allowing me to see whether their is a flame or not.
+
+Minus - The flame detections system output is kind of pointless, only alerting via light, which kind of defeats the purpose when you can see the flame.
+
+Implication - The system allows the user to detect whether there is a flame within the vicinity. I would suggest adding a buzzer to improve on.
+
+ALSO RONAV U NEED TO INCLUDE FLOWCHART FOR THE ALGORITHMS OTHERWISE YOU WILL LOSE MARKS!!!
 
 
 
